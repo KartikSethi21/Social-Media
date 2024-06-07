@@ -1,0 +1,12 @@
+/node_modules
+
+/media-backend/config/config.env
+/media-frontend/node_modules
+/media-frontend/.pnp
+/media-frontend/.pnp.js
+/media-frontend/coverage
+/media-frontend/build
+/media-frontend/.DS_Store
+/media-frontend/.env.local
+/media-frontend/.env.test.local
+/media-frontend/.env.produnction.local
