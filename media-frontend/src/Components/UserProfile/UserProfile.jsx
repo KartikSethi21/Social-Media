@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
 import {useDispatch, useSelector} from "react-redux";
-import {  followAndUnfollowUser, getAllUsers, getUserPosts, getUserProfile, loadUser } from '../../Actions/User';
+import {  followAndUnfollowUser, getAllUsers, getFollowingPosts, getUserPosts, getUserProfile, loadUser } from '../../Actions/User';
 import Post from '../Post/Post';
 import { Avatar, Button, Dialog, Typography } from '@mui/material';
 import { useAlert } from 'react-alert';
@@ -17,8 +17,10 @@ const UserProfile = () => {
    const{user,loading:userLoading,error:userError} =useSelector((state)=> state.userProfile);
 
    const{user:me} =useSelector((state)=> state.user);
-
-  const {loading,error,posts}=useSelector((state)=> state.userPost);
+   const {loading,posts,error} = useSelector(
+    (state)=>state.postofFollowing
+  );
+  // const {loading,error,posts}=useSelector((state)=> state.userPost);
 
   const {error:followError,message,loading:followLoading}=useSelector((state)=>state.like);
   
@@ -37,8 +39,12 @@ const UserProfile = () => {
   useEffect(()=>{
     dispatch(getUserPosts(params.id));
     dispatch(getUserProfile(params.id));
-
   },[dispatch,params.id]);
+
+  useEffect(()=>{
+    dispatch(getAllUsers());
+    dispatch(getFollowingPosts());
+  },[dispatch]);
 
   useEffect(()=>{
     if(me._id === params.id){
@@ -71,9 +77,7 @@ const UserProfile = () => {
     if(message){
         alert.success(message);
         dispatch({type:"clearMessage"});
-    }
-
-},[alert,error,message,followError,userError,dispatch]);
+    }},[alert,error,message,followError,userError,dispatch]);
 
 
   return loading===true || userLoading===true ? (
@@ -81,8 +85,8 @@ const UserProfile = () => {
   ):(
     <div className='account'>
         <div className="accountleft">
-        {
-            posts && posts.length > 0 ? (posts.map((post)=>( 
+
+        {posts && posts.length > 0 ? (posts.map((post)=>( 
             <Post
             key={post._id}
             postId={post._id}
@@ -94,7 +98,6 @@ const UserProfile = () => {
             ownerImage={post.owner.avatar.url}
             ownerName={post.owner.name}
             ownerId={post.owner._id}
-            
             />
           )) 
          ) : <Typography variant='h5'>User has not Posted anything yet </Typography> 
@@ -140,7 +143,7 @@ const UserProfile = () => {
               style={{backgroundColor:following?"red":"blue"}}
               disabled={followLoading}
               >
-                {following ?"Unfollow" :"Follow"}
+                {following ? "Unfollow" :"Follow"}
                 </Button>
             )
           }

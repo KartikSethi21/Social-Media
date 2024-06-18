@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import"./Search.css"
 import { Button, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../Actions/User';
+import { getAllUsers, getFollowingPosts } from '../../Actions/User';
 import User from '../User/User';
 
 const Search = () => {
@@ -14,6 +14,10 @@ const Search = () => {
         e.preventDefault();
         dispatch(getAllUsers(name));
     }
+    useEffect(()=>{
+      dispatch(getFollowingPosts());
+      dispatch(getAllUsers());
+    },[dispatch]);
   return (
         <div className='search'>
         <form action="" className='searchForm' onSubmit={submitHandler}>
@@ -35,15 +39,28 @@ const Search = () => {
                     Search</Button>
                     
         <div className='searchResults'>
-            {users && users.map((user)=>(
-                <User
-                key={user._id}
-                userId={user.name}
-                name={user.name}
-                avatar={user.avatar.url}/>
-            )
-        )
-            }
+        {users && users.length > 0 ? (
+             users.map((user)=>(
+              <User 
+              key={user._id}
+              userId={user._id}
+              name={user.name}
+              avatar={user.avatar.url}
+              /> 
+             ))
+             ): (
+             <Typography>No Users Yet </Typography>
+             )}
+        {/* //     {users && users.map((user)=>(
+        //         <User
+        //         key={user._id}
+        //         userId={user.name}
+        //         name={user.name}
+        //         avatar={user.avatar.url}/>
+        //     )
+        // )
+        //     } */}
+        
         </div>
         </form>
     </div>

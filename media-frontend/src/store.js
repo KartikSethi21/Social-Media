@@ -13,7 +13,7 @@ const store=configureStore({
         userProfile:userProfileReducer,
         userPost:userPostReducer,
     },  
-    
+            
 });
 export default store;
 

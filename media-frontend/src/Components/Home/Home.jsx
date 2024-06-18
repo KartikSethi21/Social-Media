@@ -8,8 +8,6 @@ import Loader from "../Loader/Loader";
 import {Typography} from "@mui/material";
 import { useAlert } from 'react-alert';
 const Home = () => {
-
-
   const dispatch=useDispatch();
   const alert=useAlert();
 
