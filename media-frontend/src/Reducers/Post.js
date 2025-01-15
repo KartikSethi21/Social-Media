@@ -268,7 +268,6 @@ export const userPostReducer=createReducer(initialState,(builder)=>{
 
     })
     .addCase(userPostsFailure,(state,action)=>{
-
         state.loading=true;
         state.error=action.payload;
     })

@@ -16,11 +16,12 @@ const UserProfile = () => {
 
    const{user,loading:userLoading,error:userError} =useSelector((state)=> state.userProfile);
 
-   const{user:me} =useSelector((state)=> state.user);
-   const {loading,posts,error} = useSelector(
-    (state)=>state.postofFollowing
-  );
-  // const {loading,error,posts}=useSelector((state)=> state.userPost);
+   const{user:me} =useSelector((state)=>state.user);
+
+  //  const {loading,posts,error} = useSelector(
+  //   (state)=>state.postofFollowing
+  // );
+  const {loading,error,posts}=useSelector((state)=>state.userPost);
 
   const {error:followError,message,loading:followLoading}=useSelector((state)=>state.like);
   
@@ -60,7 +61,7 @@ const UserProfile = () => {
       }else{
       setFollowing(false);
     }
-  },[me._id,user,params.id])
+  },[user,me._id,params.id])
   useEffect(()=>{
     if(error){
         alert.error(error);
