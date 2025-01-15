@@ -5,7 +5,6 @@
 /media-frontend/.pnp
 /media-frontend/.pnp.js
 /media-frontend/coverage
-/media-frontend/build
 /media-frontend/.DS_Store
 /media-frontend/.env.local
 /media-frontend/.env.test.local
