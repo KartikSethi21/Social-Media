@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 exports.connectDatabase=()=>{
+    // console.log('MONGO_URI:', process.env.MONGO_URI);
     mongoose
     .connect(process.env.MONGO_URI) 
     .then((con)=>{
@@ -7,4 +8,4 @@ exports.connectDatabase=()=>{
     }).catch((err)=>{
         console.log(err); 
     })
-}      
+}         

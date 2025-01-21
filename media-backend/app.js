@@ -5,7 +5,7 @@ const path=require("path");
 app.use(cors());
 const cookieParser=require("cookie-parser");
 if(process.env.NODE_ENV !=="production"){
-require("dotenv").config({"path":"media-backend/config/config.env"});
+require("dotenv").config({path:`C:/Users/kartik/Backend/Social_Media_App/media-backend/config/config.env`});
 }
 app.use(express.json({limit:'50mb'}));
 app.use(express.urlencoded({limit:'50mb',extended:true})); 
