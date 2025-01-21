@@ -38,7 +38,7 @@ function App() {
         <Route path='/update/profile' element={isAuthenticated ? <UpdateProfile/>:<Login/>}/>
 
         <Route path='/update/password' element={isAuthenticated ? <UpdatePassword/>:<Login/>}/>
-        
+         
         <Route path='/forgot/password' element={isAuthenticated ? <UpdatePassword/>:<ForgotPassword/>}/>
 
         <Route path='/password/reset/:token' element={isAuthenticated ? <UpdatePassword/>:<ResetPassword/>}/>
